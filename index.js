@@ -4,6 +4,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const sql = require("./src/data-service/SequelizeConnection");
+
 const Game = require('./src/game.js')
 app.get('/game',(req, res) => {
   Game.join(req.query.token)

@@ -1,5 +1,6 @@
 const dbGame = [];
 const idHelper = require('./IdHelper.js');
+const GameDataController = require('./data-service/GameData');
 
 class Game {
 	constructor({cols = 10, rows = 10} = {}){
@@ -16,11 +17,23 @@ class Game {
 		dbGame.push(game);
 		game.session = `http://localhost:3000/game?token=${token}`;
 
-		return Promise.resolve({
-			id : game.id, 
-			session : game.session,
-			playerId : game.playerId
-		})
+		return GameDataController.createGame({			
+				Token : token,
+				PlayerId : game.playerId
+			})
+			.then(async (res) => {
+				return Promise.resolve({
+					id : res, 
+					session : game.session,
+					playerId : game.playerId
+				})				
+			}).catch(err => {				
+				resolve({
+					id : 0, 
+					session : 0,
+					playerId : 0
+				});
+			});
 	};
 
 	static join(token) {
