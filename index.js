@@ -4,7 +4,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const Game = require("./src/game.js");
+const Game = require("./src/Game.js");
 app.get("/game", (req, res) => {
   Game.join(req.query.token)
     .then(game => {
