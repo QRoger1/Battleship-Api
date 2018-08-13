@@ -1,7 +1,7 @@
 module.exports.database = "DB-Battleship";
 module.exports.user = "XXXX";
 module.exports.password = "XXXX";
-module.exports.connectConfig = {
+module.exports.connectionConfig = {
   dialect: "mssql",
   host: "localhost",
   operatorsAliases: false,

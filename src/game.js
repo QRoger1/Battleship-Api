@@ -1,5 +1,5 @@
 const idHelper = require("./IdHelper.js");
-const GameData = require("./data-base/GameData");
+const GameData = require("./database/GameData");
 
 class Game {
   constructor({ cols = 10, rows = 10 } = {}) {
@@ -12,9 +12,7 @@ class Game {
     game.playerId = idHelper();
     const token = idHelper();
     game.token = token;
-    game.session = `http://localhost:3000/game?token=${token}`;
-    console.log(game.cols);
-    console.log(game.rows);
+    game.session = `http://localhost:3000/game?token=${token}`;    
     return GameData.createGame({
       Token: game.token,
       PlayerOneId: game.playerId,
@@ -38,13 +36,13 @@ class Game {
     return GameData.findGameByToken(token)
       .then(res => {
         if (res === null || res.dataValues === undefined) {
-          return Promise.reject("Game Not Found");
+          throw "Game Not Found";
         }
         const game = res.dataValues;
-        return Promise.resolve({
+        return {
           id: game.Id,
           playerId: idHelper()
-        });
+        };
       })
       .catch(err => {
         console.log(err);
