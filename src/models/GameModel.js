@@ -1,34 +1,32 @@
-const Sequelize = require("sequelize");
-
-module.exports = function(sequelizeInstance) {
+module.exports = function(sequelizeInstance, DataTypes) {
   return sequelizeInstance.define(
     "Game",
     {
       Id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         unique: true,
         allowNull: false
       },
       PlayerOneId: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
       PlayerTwoId: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: true
       },
       Token: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
       Columns: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       Rows: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
       }
     },
